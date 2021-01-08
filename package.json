@@ -1,0 +1,25 @@
+{
+  "name": "miho",
+  "version": "1.0.0",
+  "description": "Miho, a bot that will enrich your Discord life even more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CwhiteKJ/Miho.git"
+  },
+  "author": "CwhiteKJ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CwhiteKJ/Miho/issues"
+  },
+  "homepage": "https://github.com/CwhiteKJ/Miho#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "fs": "0.0.1-security",
+    "knex": "^0.21.15",
+    "mysql": "^2.18.1"
+  }
+}
