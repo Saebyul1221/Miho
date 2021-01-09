@@ -1,5 +1,5 @@
 module.exports.run = async (client, message, args, knex, embed) => {
-  if (args.length < 1)
+  if (args.length < 3)
     return message.channel.send(
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
     )
@@ -29,8 +29,8 @@ function apply(message, embed, knex, data, Dtitle, Ddescription) {
 `)
   message.channel.send(`${message.member}`, { embed: embed }).then((msg) => {
     msg.react("659355468715786262")
-    msg.react("659355468816187405")
     msg
+      .react("659355468816187405")
       .awaitReactions(filter, {
         max: 1,
         time: 10000,
