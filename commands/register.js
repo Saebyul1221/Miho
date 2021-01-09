@@ -32,13 +32,12 @@ ${client.user.username}의 명령어를 이용하실려면 먼저 이용약관�
           await knex
             .insert({ id: message.author.id, favorite: "0" })
             .from("user")
-          return message.channel.send(
-            `${message.member} 가입되었습니다! 이제 미호의 모든 기능을 사용하실 수 있어요!`
-          )
+          return message.channel.send(`
+${message.member} 가입되었습니다! 이제 ${client.user.username}의 모든 기능을 사용하실 수 있어요!
+          `)
         }
       })
       .catch(async (collected) => {
-        console.log(collected)
         await message.channel.send(
           `${message.member} 시간이 초과되어서 취소되었어요!`
         )
