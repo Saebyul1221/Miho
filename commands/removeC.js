@@ -1,5 +1,8 @@
 module.exports.run = async (client, message, args, knex, embed) => {
-  if (args[1] === undefined) return message.channel.send()
+  if (args[1] === undefined)
+    return message.channel.send(
+      `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
+    )
   let data = (
     await knex("custom").where({
       title: args[1],
