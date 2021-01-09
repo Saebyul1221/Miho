@@ -27,7 +27,15 @@ module.exports.run = async (client, message, args, knex, embed) => {
           `${message.member} ${args[2]} ID를 블랙리스트에서 제거했어요!`
         )
       }
+    } else {
+      message.channel.send(
+        `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
+      )
     }
+  } else {
+    message.channel.send(
+      `${message.member} 해당 명령어는 봇 관리자만 쓸 수 있어요!`
+    )
   }
 }
 

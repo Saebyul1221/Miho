@@ -4,11 +4,11 @@ const client = new Discord.Client(config.client.bot)
 client.commands = new Discord.Collection()
 const knex = require("knex")(config.database)
 const fs = require("fs")
-let request = require("request")
-let headers = {
-  Authorization: config.client.pingpong_token,
-  "Content-Type": "application/json",
-}
+// let request = require("request")
+// let headers = {
+//   Authorization: config.client.pingpong_token,
+//   "Content-Type": "application/json",
+// }
 
 fs.readdir("./commands/", (error, files) => {
   if (error) return console.log(error)
@@ -73,24 +73,24 @@ ${customCommand.description}
   if (commandFile) {
     commandFile.run(client, message, args, knex, embed)
   } else {
-    let dataString = `{request: {query: "${args.join(" ")}"}}`
-    let options = {
-      url: config.client.pingpong_url,
-      method: "POST",
-      headers: headers,
-      body: dataString,
-    }
-    function callback(error, response, body) {
-      if (!error && response.statusCode == 200) {
-        let msg = JSON.parse(body, null, 1).response.replies[0].text
-        let embed = new Discord.MessageEmbed()
-        embed.setColor("#5fe9ff")
-        embed.setTitle(msg)
-        embed.setFooter("Powered by https://pingpong.us/")
-        message.channel.send(`${message.member}`, { embed: embed })
-      }
-    }
-    request(options, callback)
+    // let dataString = `{request: {query: "${args.join(" ")}"}}`
+    // let options = {
+    //   url: config.client.pingpong_url,
+    //   method: "POST",
+    //   headers: headers,
+    //   body: dataString,
+    // }
+    // function callback(error, response, body) {
+    //   if (!error && response.statusCode == 200) {
+    //     let msg = JSON.parse(body, null, 1).response.replies[0].text
+    //     let embed = new Discord.MessageEmbed()
+    //     embed.setColor("#5fe9ff")
+    //     embed.setTitle(msg)
+    //     embed.setFooter("Powered by https://pingpong.us/")
+    //     message.channel.send(`${message.member}`, { embed: embed })
+    //   }
+    // }
+    // request(options, callback)
   }
 })
 
