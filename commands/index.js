@@ -1,3 +1,5 @@
 module.exports.ping = require("./ping")
 module.exports.register = require("./register")
 module.exports.help = require("./help")
+module.exports.custom = require("./custom")
+module.exports.removeC = require("./removeC")
