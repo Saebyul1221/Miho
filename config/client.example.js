@@ -12,4 +12,6 @@ module.exports = {
     },
     ws: { intents: new Intents(Intents.ALL) },
   },
+  pingpong_token: "Basic token",
+  pingpong_url: "",
 }
