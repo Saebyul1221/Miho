@@ -1,11 +1,11 @@
 module.exports.run = async (client, message, _args, _knex, embed) => {
   const commandDir = require("./")
 
-  embed.setDescription(`${client.user.username}의 도움말이에요!`)
+  embed.setDescription(`${client.user.username}의 도움말이에요!\n\u200b`)
   for (const [key, value] of Object.entries(commandDir)) {
     embed.addField(
       "미호야 " + value.help.name,
-      value.help.description + "\u200b"
+      value.help.description + "\n\u200b"
     )
   }
 
