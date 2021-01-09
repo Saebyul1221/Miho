@@ -8,7 +8,9 @@ const fs = require("fs")
 fs.readdir("./commands/", (error, files) => {
   if (error) return console.log(error)
 
-  let jsfile = files.filter((f) => f.split(".").pop() === "js")
+  let jsfile = files.filter(
+    (f) => f.split(".").pop() === "js" && f.split(".")[0] !== "index"
+  )
   if (jsfile.length <= 0) return console.log("명령어들을 찾지 못했어요..")
 
   jsfile.forEach((f, i) => {
@@ -45,6 +47,19 @@ client.on("message", async (message) => {
   let registerCommand = client.commands.get("가입")
   let msg = message.content.split(" ")
   let args = msg.slice(1)
+  let customCommand
+  args[0] !== undefined
+    ? (customCommand = (await knex("custom").where({ title: args[0] }))[0])
+    : undefined
+
+  if (customCommand?.title !== undefined)
+    return message.channel.send(`
+${customCommand.description}
+
+\`${client.users.cache.get(customCommand.author).username}#${
+      client.users.cache.get(customCommand.author).discriminator
+    }\` 님이 알려주셨어요!
+`)
   const user = (await knex("user").where({ id: message.author.id }))[0]
   if (!user) return registerCommand.run(client, message, args, knex, embed)
 
