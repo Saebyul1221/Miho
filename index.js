@@ -53,17 +53,21 @@ client.on("message", async (message) => {
   let registerCommand = client.commands.get("가입")
   let msg = message.content.split(" ")
   let args = msg.slice(1)
-  let customCommand
-  args[0] !== undefined
-    ? (customCommand = (await knex("custom").where({ title: args[0] }))[0])
-    : undefined
+  let customCommand =
+    args[0] !== undefined
+      ? await knex("custom").where({ title: args[0] })
+      : undefined
 
-  if (customCommand?.title !== undefined)
+  let size = customCommand.length
+  let RanInt = Math.floor(Math.random() * size)
+  console.log(size, RanInt)
+
+  if (customCommand[RanInt]?.title !== undefined)
     return message.channel.send(`
-${customCommand.description}
+${customCommand[RanInt].description}
 
-\`${client.users.cache.get(customCommand.author).username}#${
-      client.users.cache.get(customCommand.author).discriminator
+\`${client.users.cache.get(customCommand[RanInt].author).username}#${
+      client.users.cache.get(customCommand[RanInt].author).discriminator
     }\` 님이 알려주셨어요!
 `)
   const user = (await knex("user").where({ id: message.author.id }))[0]
