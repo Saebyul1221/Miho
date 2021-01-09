@@ -60,7 +60,6 @@ client.on("message", async (message) => {
 
   let size = customCommand.length
   let RanInt = Math.floor(Math.random() * size)
-  console.log(size, RanInt)
 
   if (customCommand[RanInt]?.title !== undefined)
     return message.channel.send(`
