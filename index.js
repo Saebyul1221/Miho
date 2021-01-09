@@ -34,9 +34,10 @@ client.on("message", async (message) => {
 
   const black = (await knex("blacklist").where({ id: message.author.id }))[0]
   if (black?.id !== undefined) {
-    let moderator = client.users.cache.get(black.id)
+    let moderator = client.users.cache.get(black.admin)
     embed.setDescription(`
 앗, ${message.member}님은 ${client.user.username} 사용이 제한되셨어요!
+
 차단 사유: ${black.reason}
 차단 시각: ${black.date}
 담당관리자: ${moderator.username}#${moderator.discriminator}
