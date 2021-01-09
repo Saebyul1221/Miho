@@ -14,7 +14,11 @@ module.exports.run = async (client, message, args, knex, embed) => {
     return message.channel.send(
       `${message.member} 봇 명령어와 겹치는 단어는 사용하실 수 없어요!`
     )
-  let replyMsg = args.slice(2).join(" ")
+  let replyMsg = args
+    .slice(2)
+    .join(" ")
+    .replace("@everyone", "에브리원")
+    .replace("@here", "히얼")
 
   let data = (
     await knex("custom").where({
