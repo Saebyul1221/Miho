@@ -45,7 +45,7 @@ client.on("message", async (message) => {
 
   if (!message.content.startsWith(config.client.prefix)) return
 
-  let embed = require("../utils/embed")(message)
+  let embed = require("./utils/embed")(message)
 
   const black = (await knex("blacklist").where({ id: message.author.id }))[0]
   if (black?.id !== undefined) {
