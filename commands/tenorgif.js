@@ -14,11 +14,11 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
       `${message.member} 성적인 단어가 포함된 키워드는 NSFW 채널에서만 사용하실 수 있어요!`
     )
   } else {
-    sendResult(message, embed)
+    sendResult(message, args, embed)
   }
 }
 
-function sendResult(message, embed) {
+function sendResult(message, args, embed) {
   const fetch = require("node-fetch")
   let url = `https://api.tenor.com/v1/search?q=${encodeURI(
     args.join(" ")
