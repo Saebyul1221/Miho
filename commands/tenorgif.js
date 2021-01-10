@@ -1,5 +1,4 @@
-const { tenor_token } = require("../config/client")
-const fetch = require("node-fetch")
+const { tenor_token, ignore_nsfw_tag } = require("../config/client")
 
 module.exports.run = async (_client, message, args, _knex, embed) => {
   if (args[1] === undefined)
@@ -7,10 +6,23 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
     )
 
+  if (
+    !message.channel.nsfw &&
+    ignore_nsfw_tag.some((word) => args.join(" ").includes(word))
+  ) {
+    return message.channel.send(
+      `${message.member} 성적인 단어가 포함된 키워드는 NSFW 채널에서만 사용하실 수 있어요!`
+    )
+  } else {
+    sendResult(message, embed)
+  }
+}
+
+function sendResult(message, embed) {
+  const fetch = require("node-fetch")
   let url = `https://api.tenor.com/v1/search?q=${encodeURI(
     args.join(" ")
   )}&key=${tenor_token}&limit=10`
-
   fetch(url)
     .then((res) => res.json())
     .then((json) => {
@@ -26,7 +38,6 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
       message.channel.send(`${message.member}`, { embed: embed })
     })
 }
-
 module.exports.help = {
   name: "짤",
   description: "검색한 이름의 짤을 검색합니다.",

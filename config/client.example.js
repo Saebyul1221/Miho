@@ -15,4 +15,5 @@ module.exports = {
   pingpong_token: "Basic token",
   pingpong_url: "",
   tenor_token: "",
+  ignore_nsfw_tag: [],
 }
