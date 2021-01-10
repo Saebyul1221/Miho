@@ -6,16 +6,12 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
     )
 
-  if (
-    !message.channel.nsfw &&
-    ignore_nsfw_tag.some((word) => args.slice(1).join(" ").includes(word))
-  ) {
-    return message.channel.send(
-      `${message.member} 성적인 단어가 포함된 키워드는 NSFW 채널에서만 사용하실 수 있어요!`
-    )
-  } else {
-    sendResult(message, args, embed)
-  }
+  !message.channel.nsfw &&
+  ignore_nsfw_tag.some((word) => args.slice(1).join(" ").includes(word))
+    ? message.channel.send(
+        `${message.member} 성적인 단어가 포함된 키워드는 NSFW 채널에서만 사용하실 수 있어요!`
+      )
+    : sendResult(message, args, embed)
 }
 
 function sendResult(message, args, embed) {
