@@ -14,4 +14,5 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
 module.exports.help = {
   name: "골라",
   description: "여러 단어 중 하나를 선택합니다.",
+  use: "미호야 골라 [단어1] [단어2] (단어가 여러 개여도 됩니다.)"
 }
