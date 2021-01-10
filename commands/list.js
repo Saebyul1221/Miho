@@ -67,7 +67,7 @@ async function pushArray(knex) {
   for (let i = 0; i < pleasestop; i++) _array.push(new MessageEmbed())
 
   for (let i = 0; i < data.length; i++)
-    words.push({ title: data[i].title, description: data[i].description })
+    words.push({ title: data[i].title, description: data[i].description+"\u200b" })
 
   for (let i = 0; i < stopLoop; i++) {
     for (let j = 0; j < 5; j++) {
