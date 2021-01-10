@@ -7,7 +7,7 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
   let words = args.slice(1)
   let random = Math.floor(Math.random() * words.length)
 
-  embed.setDescrpition(`제 선택은 \`${words[random]}\` 이에요!`)
+  embed.setDescription(`제 선택은 \`${words[random]}\` 이에요!`)
   message.channel.send(`${message.member}`, { embed: embed })
 }
 
