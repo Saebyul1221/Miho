@@ -4,17 +4,11 @@ module.exports.run = async (client, message, _args, _knex, embed) => {
   embed.setDescription(`${client.user.username}의 도움말이에요!\n\u200b`)
   let i = 1
   for (const [key, value] of Object.entries(commandDir)) {
-    i % 2 == 0
-      ? embed.addField(
-          "미호야 " + value.help.name,
-          value.help.description + "\n\u200b",
-          true
-        )
-      : embed.addField(
-          "미호야 " + value.help.name,
-          value.help.description + "\n\u200b",
-          false
-        )
+    embed.addField(
+      "미호야 " + value.help.name,
+      value.help.description + "\n\u200b",
+      true
+    )
   }
 
   message.channel.send(`${message.member}`, { embed: embed })
