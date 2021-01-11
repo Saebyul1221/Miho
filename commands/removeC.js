@@ -6,6 +6,7 @@ module.exports.run = async (client, message, args, knex, embed) => {
   let data = (
     await knex("custom").where({
       title: args[1],
+      author: message.author.id
     })
   )[0]
 
