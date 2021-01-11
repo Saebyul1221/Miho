@@ -33,16 +33,6 @@ client.on("ready", () => {
 })
 client.on("message", async (message) => {
   if (message.author.bot || !message.guild) return
-  if (
-    ["어떻게해요?", "어떻게해여?", "오류나요"].some((word) =>
-      message.content.includes(word)
-    ) &&
-    message.channel.id === "727722459645739048"
-  )
-    return message.channel.send(
-      `${message.member} <#727722365517168652> 에서 질문해주세요.`
-    )
-
   if (!message.content.startsWith(config.client.prefix)) return
 
   let embed = require("./utils/embed")(message)
