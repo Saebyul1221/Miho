@@ -58,6 +58,9 @@ client.on("message", async (message) => {
       ? await knex("custom").where({ title: args[0] })
       : undefined
 
+  const user = (await knex("user").where({ id: message.author.id }))[0]
+  if (!user) return registerCommand.run(client, message, args, knex, embed)
+  
   let size = customCommand.length
   let RanInt = Math.floor(Math.random() * size)
   if (customCommand[RanInt]?.title !== undefined)
@@ -68,8 +71,6 @@ ${customCommand[RanInt].description}
       client.users.cache.get(customCommand[RanInt].author)?.discriminator
     }\` 님이 알려주셨어요!
 `)
-  const user = (await knex("user").where({ id: message.author.id }))[0]
-  if (!user) return registerCommand.run(client, message, args, knex, embed)
 
   let commandFile = client.commands.get(args[0])
   if (commandFile) {
