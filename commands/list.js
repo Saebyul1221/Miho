@@ -1,7 +1,9 @@
-const { MessageEmbed } = require("discord.js")
+module.exports.run = async (client, message, _args, _knex, embed) => {
+  embed.setDescription(
+    `${client.user.username}의 학습 목록은 [여기서](http://urtica.xyz) 확인하실 수 있어요!`
+  )
 
-module.exports.run = async (_client, message, _args, _knex, _embed) => {
-  message.channel.send()
+  message.channel.send(`${message.member}`, { embed: embed })
 }
 
 module.exports.help = {
