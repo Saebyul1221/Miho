@@ -18,6 +18,8 @@
   "homepage": "https://github.com/CwhiteKJ/Miho#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "knex": "^0.21.15",
     "mysql": "^2.18.1",

@@ -4,6 +4,7 @@ const client = new Discord.Client(config.client.bot)
 client.commands = new Discord.Collection()
 const knex = require("knex")(config.database)
 const fs = require("fs")
+require("./web/index") // Web
 // let request = require("request")
 // let headers = {
 //   Authorization: config.client.pingpong_token,
@@ -60,7 +61,7 @@ client.on("message", async (message) => {
 
   const user = (await knex("user").where({ id: message.author.id }))[0]
   if (!user) return registerCommand.run(client, message, args, knex, embed)
-  
+
   let size = customCommand.length
   let RanInt = Math.floor(Math.random() * size)
   if (customCommand[RanInt]?.title !== undefined)
@@ -76,7 +77,7 @@ ${customCommand[RanInt].description}
   if (commandFile) {
     commandFile.run(client, message, args, knex, embed)
   } else {
-    // let dataString = `{request: {query: "${args.join(" ")}"}}`
+    // let dataString = `{request: {query: "${args.slice(1).join(" ")}"}}`
     // let options = {
     //   url: config.client.pingpong_url,
     //   method: "POST",
