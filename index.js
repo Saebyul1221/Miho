@@ -1,15 +1,18 @@
 const config = require("./config")
 const Discord = require("discord.js")
+const cron = require("node-cron")
 const client = new Discord.Client(config.client.bot)
 client.commands = new Discord.Collection()
 const knex = require("knex")(config.database)
+const Stocks = require("./utils/Stocks.js")
+const Stock = new Stocks(knex)
 const fs = require("fs")
-require("./web/index") // Web
-// let request = require("request")
-// let headers = {
-//   Authorization: config.client.pingpong_token,
-//   "Content-Type": "application/json",
-// }
+const data = {
+  register: [],
+  cooldown: {},
+  action: [],
+}
+// require("./web/index") // Web
 
 fs.readdir("./commands/", (error, files) => {
   if (error) return console.log(error)
@@ -31,7 +34,14 @@ client.on("ready", () => {
     `${client.user.username}#${client.user.discriminator} IS READY!\n\n전체 유저 수: ${client.users.cache.size}`
   )
   console.log("=".repeat(40))
+
+  cron.schedule("*/10 * * * *", async function () {
+    await Stock.update()
+  })
 })
+
+// SHAKE CARROT
+
 client.on("message", async (message) => {
   if (message.author.bot || !message.guild) return
   if (!message.content.startsWith(config.client.prefix)) return
@@ -73,28 +83,51 @@ ${customCommand[RanInt].description}
     }\` 님이 알려주셨어요!
 `)
 
+  if (user.action)
+    return message.channel.send(
+      `${message.member} 이미 진행중인 작업이 있어요!`
+    )
+
+  if (
+    data.cooldown[message.author.id] &&
+    Number(data.cooldown[message.author.id]) > Number(new Date())
+  ) {
+    let time = Number(
+      (Number(data.cooldown[message.author.id]) - Number(new Date())) / 1000
+    ).toFixed(2)
+
+    embed.setDescription(
+      `해당 명령어를 사용하시기 위해선 \`${time}\`초를 더 기다리셔야해요!`
+    )
+    return message.channel.send(`${message.member}`, { embed: embed })
+  }
+  data.cooldown[message.author.id] = new Date(Number(new Date()) + 2000)
+
   let commandFile = client.commands.get(args[0])
   if (commandFile) {
-    commandFile.run(client, message, args, knex, embed)
-  } else {
-    // let dataString = `{request: {query: "${args.slice(1).join(" ")}"}}`
-    // let options = {
-    //   url: config.client.pingpong_url,
-    //   method: "POST",
-    //   headers: headers,
-    //   body: dataString,
-    // }
-    // function callback(error, response, body) {
-    //   if (!error && response.statusCode == 200) {
-    //     let msg = JSON.parse(body, null, 1).response.replies[0].text
-    //     let embed = new Discord.MessageEmbed()
-    //     embed.setColor("#5fe9ff")
-    //     embed.setTitle(msg)
-    //     embed.setFooter("Powered by https://pingpong.us/")
-    //     message.channel.send(`${message.member}`, { embed: embed })
-    //   }
-    // }
-    // request(options, callback)
+    commandFile.run(client, message, args, knex, embed, data).catch((error) => {
+      knex("user")
+        .where({ action: 1, id: message.author.id })
+        .update({ action: 0 })
+
+      console.error(error)
+
+      let errorMsg = [
+        "아야... 분주하게 명령어를 실행하다가 넘어져서 명령을 실행할 수 없었어요..ㅠ\n오류 내용은 이래요.",
+        "미야라는 친구의 하소연을 듣다가 명령어를 까먹어서 실행하지 못했어요..\n오류 내용은 이래요.",
+        "Chip_ 이 부르는 노래를 듣다가 너무 못 불러서 고막이 다쳐서 명령어를 실행하지 못했어요..\n오류 내용은 이래요.",
+        "엥..헐? 어떤 명령어를 요청하셨는데 갑자기 아무것도 기억이 안나요!! 죄송해요..\n오류 내용은 이래요.",
+      ]
+      let random = Math.floor(Math.random() * errorMsg.length)
+      embed.addField(
+        errorMsg[random],
+        `\`\`\`js
+${error}
+\`\`\``
+      )
+
+      message.channel.send(`${message.member}`, { embed: embed })
+    })
   }
 })
 client.login(config.client.token)
