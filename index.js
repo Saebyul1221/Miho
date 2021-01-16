@@ -12,7 +12,7 @@ const data = {
   cooldown: {},
   action: [],
 }
-// require("./web/index") // Web
+require("./web/index") // Web
 
 fs.readdir("./commands/", (error, files) => {
   if (error) return console.log(error)
