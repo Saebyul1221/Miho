@@ -7,7 +7,7 @@ module.exports = class Stocks {
     let stocks = await this.knex("stocks").select("*")
 
     for (let i = 0; i < stocks.length; i++) {
-      let random = Math.floor(Math.random() * 20) + -25
+      let random = Math.floor(Math.random() * 10) + -10
       let now = Number(stocks[i].now) + random
       if (now > 0) {
         await this.knex("stocks")

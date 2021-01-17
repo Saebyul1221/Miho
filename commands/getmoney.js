@@ -14,16 +14,16 @@ module.exports.run = async (_client, message, _args, knex, embed, _data) => {
     cool.money = Math.round(new Date() / 1000)
     await knex
       .update({
-        money: Number(u["money"]) + 500,
+        money: Number(u["money"]) + 100,
         cooldown: JSON.stringify(cool),
       })
       .where({ id: message.author.id })
       .from("user")
-    message.channel.send(`${message.member} 500원 드렸어요! 흥행하세요!`)
+    message.channel.send(`${message.member} 100원 드렸어요! 흥행하세요!`)
   }
 }
 
 module.exports.help = {
   name: "돈받기",
-  description: "500원을 받습니다.",
+  description: "100원을 받습니다.",
 }
