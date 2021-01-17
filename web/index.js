@@ -1,5 +1,5 @@
 const path = require("path")
-const viewsPath = path.join(__dirname, "../views")
+const viewsPath = path.join(__dirname, "./views")
 const express = require("express")
 const app = express()
 
