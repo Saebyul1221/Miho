@@ -22,15 +22,9 @@ ${client.user.username}의 명령어를 이용하실려면 먼저 이용약관�
         errors: ["time"],
       })
       .then(async (collected) => {
-        // console.log(collected.array()[0])
-        // if (!collected) {
-        //   await message.channel.send(
-        //     `${message.member} 시간이 초과되어서 취소되었어요!`
-        //   )
-        // }
         if (collected.array()[0].content === "동의합니다") {
           await knex
-            .insert({ id: message.author.id, favorite: "0" })
+            .insert({ id: message.author.id, money: "0" })
             .from("user")
           return message.channel.send(`
 ${message.member} 가입되었습니다! 이제 ${client.user.username}의 모든 기능을 사용하실 수 있어요!
