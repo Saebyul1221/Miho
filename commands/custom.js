@@ -63,7 +63,7 @@ function apply(message, embed, knex, data, Dtitle, Ddescription) {
           if (collected.array()[0].emoji.id === "659355468715786262") {
             if (data?.author !== undefined) {
               await knex("custom")
-                .where({ title: Dtitle })
+                .where({ title: Dtitle, author: message.author.id })
                 .update({ description: Ddescription })
 
               msg.delete()
