@@ -1,11 +1,8 @@
 const config = require("./config")
 const Discord = require("discord.js")
-const cron = require("node-cron")
 const client = new Discord.Client(config.client.bot)
 client.commands = new Discord.Collection()
 const knex = require("knex")(config.database)
-const Stocks = require("./utils/Stocks.js")
-const Stock = new Stocks(knex)
 const fs = require("fs")
 const data = {
   register: [],
@@ -34,10 +31,6 @@ client.on("ready", () => {
     `${client.user.username}#${client.user.discriminator} IS READY!\n\n전체 유저 수: ${client.users.cache.size}`
   )
   console.log("=".repeat(40))
-
-  cron.schedule("*/10 * * * *", async function () {
-    await Stock.update()
-  })
 })
 
 // SHAKE CARROT
