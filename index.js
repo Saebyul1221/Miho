@@ -1,8 +1,11 @@
 const config = require("./config")
 const Discord = require("discord.js")
+const cron = require("node-cron")
 const client = new Discord.Client(config.client.bot)
 client.commands = new Discord.Collection()
 const knex = require("knex")(config.database)
+const Stocks = require("./utils/Stocks.js")
+const Stock = new Stocks(knex)
 const fs = require("fs")
 const data = {
   register: [],
@@ -31,6 +34,10 @@ client.on("ready", () => {
     `${client.user.username}#${client.user.discriminator} IS READY!\n\n전체 유저 수: ${client.users.cache.size}`
   )
   console.log("=".repeat(40))
+
+  cron.schedule("*/10 * * * *", async function () {
+    await Stock.update()
+  })
 })
 
 // SHAKE CARROT
@@ -67,14 +74,28 @@ client.on("message", async (message) => {
 
   let size = customCommand.length
   let RanInt = Math.floor(Math.random() * size)
-  if (customCommand[RanInt]?.title !== undefined)
+
+  if (customCommand[RanInt]?.title !== undefined) {
+    let replaceObj = {
+      "{멘션}": message.member,
+      "{아이디}": message.author.id,
+      "{닉네임}": message.member.displayName,
+    }
+
+    let sendCommand = customCommand[RanInt]?.description
+
+    for (let [key, value] of Object.entries(replaceObj)) {
+      sendCommand = sendCommand.replaceAll(key, value)
+    }
+
     return message.channel.send(`
-${customCommand[RanInt].description}
+${sendCommand}
 
 \`${client.users.cache.get(customCommand[RanInt].author)?.username}#${
       client.users.cache.get(customCommand[RanInt].author)?.discriminator
     }\` 님이 알려주셨어요!
 `)
+  }
 
   if (user.action)
     return message.channel.send(
