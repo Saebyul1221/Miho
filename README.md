@@ -7,6 +7,7 @@ This bot is designed for **practice** purposes and **does not provide a service*
 > - [Config files](https://github.com/wonderlandpark/wonderbot/tree/develop/src/config)
 > - [Cooldown and action](https://github.com/wonderlandpark/wonderbot/blob/develop/src/tools/bot/handler.js#L10)
 > - [Buy stock](https://github.com/wonderlandpark/wonderbot/blob/develop/src/commands/money/buy.js), [Sell stock](https://github.com/wonderlandpark/wonderbot/blob/develop/src/commands/money/sell.js), [Payday](https://github.com/wonderlandpark/wonderbot/blob/develop/src/commands/money/payday.js)
+> - [Web Login](https://github.com/caelinj/discord.js-dashboard)
 
 ---
 

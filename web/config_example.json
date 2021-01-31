@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+
+  "clientId": "",
+  "clientSecret": "",
+  "scopes": ["identify"],
+  "redirectUri": "http://localhost:3000/authorize/callback"
+}
