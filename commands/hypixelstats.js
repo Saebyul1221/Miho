@@ -19,11 +19,11 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
 function sendResult(message, user, embed, data) {
   if (data.player?.stats !== undefined) {
     let rank =
-      data.player.rank !== undefined
-        ? data.player.newPackageRank !== undefined
+      data.player.rank === undefined
+        ? data.player.newPackageRank === undefined
           ? "없음"
           : data.player.newPackageRank
-        : data.player.newPackageRank
+        : data.player.rank
     let skywars = data.player.stats.SkyWars
     let bedwars = data.player.stats.Bedwars
     let karma = data.player.karma
