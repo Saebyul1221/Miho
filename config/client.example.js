@@ -16,4 +16,5 @@ module.exports = {
   pingpong_url: "",
   tenor_token: "",
   ignore_nsfw_tag: [],
+  hypixel_token: "",
 }
