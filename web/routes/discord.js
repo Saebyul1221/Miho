@@ -62,8 +62,6 @@ router.get("/callback", (req, res) => {
     })
 })
 
-router.get("/logout", forceAuth, (req, res) => {
-  req.session.destroy(() => { res.redirect("/") })
-})
+router.get("/logout", forceAuth, (req, res) => { req.session.destroy(() => { res.redirect("/") })})
 
 module.exports = router
