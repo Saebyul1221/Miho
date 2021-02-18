@@ -4,3 +4,4 @@ config/database.js
 utils/Stocks.js
 web/config.json
 package-lock.json
+web/images/
