@@ -17,4 +17,5 @@ module.exports.run = async (_client, message, args, _knex, embed) => {
 module.exports.help = {
   name: "색코드",
   description: "입력한 색코드의 색을 보여드립니다.",
+  use: "미호야 색코드 [HEX]",
 }
