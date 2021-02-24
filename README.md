@@ -1,5 +1,7 @@
 # Miho
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/93008205ded6417aad1b57e52eac17c2)](https://www.codacy.com/gh/CwhiteKJ/Miho/dashboard?utm_source=github.com&utm_medium=referral&utm_content=CwhiteKJ/Miho&utm_campaign=Badge_Grade)
+
 This bot is designed for **practice** purposes and **does not provide a service**.
 
 > **Codes from referenced repositories:**
