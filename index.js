@@ -22,7 +22,7 @@ fs.readdir("./commands/", (error, files) => {
   )
   if (jsfile.length <= 0) return console.log("명령어들을 찾지 못했어요..")
 
-  jsfile.forEach((f, i) => {
+  jsfile.forEach((f) => {
     let props = require(`./commands/${f}`)
     client.commands.set(props.help.name, props)
   })

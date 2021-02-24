@@ -1,4 +1,4 @@
-module.exports.run = async (_client, message, _args, knex, embed, _data) => {
+module.exports.run = async (_client, message, _args, knex, embed) => {
   const stocks = await knex("stocks").select("*")
   let user = (await knex("user").where({ id: message.author.id }))[0]
   let st = {

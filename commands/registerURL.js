@@ -1,6 +1,6 @@
 const Hosting = require("../utils/hosting")
 
-module.exports.run = async (client, message, args, knex, _embed) => {
+module.exports.run = async (client, message, args, knex) => {
   if (args[1] === undefined)
     return message.channel.send(
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`

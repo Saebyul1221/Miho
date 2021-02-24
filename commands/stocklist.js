@@ -1,5 +1,3 @@
-const embed = require("../utils/embed")
-
 module.exports.run = async (_client, message, _args, knex, embed) => {
   let data = await knex("stocks").select("*")
   let stocks = ""
@@ -9,7 +7,7 @@ module.exports.run = async (_client, message, _args, knex, embed) => {
     miho: "미호전자",
     noname: "무명증권",
   }
-  
+
   for (let i = 0; i < data.length; i++) {
     let price = data[i].prices.replace("[", "").replace("]", "") // 변동 후 값
     let before = data[i].lastchange // 변동 전 값

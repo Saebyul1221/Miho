@@ -1,4 +1,4 @@
-module.exports.run = async (_client, message, args, knex, embed, _data) => {
+module.exports.run = async (_client, message, args, knex, embed) => {
   if (args.length < 3)
     return message.channel.send(
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`

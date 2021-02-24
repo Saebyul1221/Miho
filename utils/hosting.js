@@ -38,6 +38,7 @@ module.exports = class Hosting {
     let request = require("request")
     let fs = require("fs")
     let path = require("path")
+    const __dirname = path.resolve(path.dirname(""))
     let imagePath = path.resolve(__dirname, `../web/images/${file.name}`)
     request.get(file.url).pipe(fs.createWriteStream(imagePath))
   }

@@ -1,6 +1,6 @@
 const { owners } = require("../config/client")
 
-module.exports.run = async (client, message, args, knex, embed) => {
+module.exports.run = async (client, message, args, knex) => {
   if (owners.some((oid) => message.author.id.includes(oid))) {
     if (args.length <= 2)
       return message.channel.send(

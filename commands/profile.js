@@ -27,6 +27,7 @@ function checkUser(client, message, user) {
   if (searchById === undefined) return searchByName.user
   else return searchById
 }
+
 module.exports.help = {
   name: "프로필",
   description: "해당 유저의 프로필을 확인합니다.",

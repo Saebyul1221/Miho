@@ -1,4 +1,4 @@
-module.exports.run = async (_client, message, _args, knex, embed, _data) => {
+module.exports.run = async (_client, message, _args, knex) => {
   let u = (
     await knex.select("*").from("user").where({ id: message.author.id })
   )[0]

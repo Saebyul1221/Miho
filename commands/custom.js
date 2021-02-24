@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, knex, embed) => {
 
   let commandDir = require("./")
   let commands = []
-  for (const [key, value] of Object.entries(commandDir)) {
+  for (const [, value] of Object.entries(commandDir)) {
     commands.push(value.help.name)
   }
 
@@ -82,7 +82,7 @@ function apply(message, embed, knex, data, Dtitle, Ddescription) {
             message.channel.send(`${message.member} 학습을 취소했어요!`)
           }
         })
-        .catch((_) => {
+        .catch(() => {
           msg.delete()
           message.channel.send(
             `${message.member} 시간이 초과되어 학습을 취소했어요!`
