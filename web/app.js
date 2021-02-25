@@ -1,8 +1,6 @@
 const express = require("express")
 const app = express()
 const path = require("path")
-const __dirname = path.resolve(path.dirname(""))
-
 const viewsPath = path.join(__dirname, "./views")
 
 let port = require("./config.json").port || 80

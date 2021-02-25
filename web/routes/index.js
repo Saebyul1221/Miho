@@ -46,7 +46,6 @@ router.get("/url", async (req, res) => {
     let data = await knex("image").where({ keyword: id.f })
     if (data.length <= 0) return invaild(res)
     let path = require("path")
-    const __dirname = path.resolve(path.dirname(""))
     let imagePath = path.resolve(__dirname, `../images/${data[0].image_name}`)
     fs.readFile(imagePath, function (_, image) {
       res.set("Content-Type", "image/png").send(image)
