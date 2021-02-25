@@ -12,5 +12,6 @@ module.exports = {
     "no-unused-vars": 1,
     "no-redeclare": 1,
     "no-console": 0,
+    "no-undef": 0,
   },
 }
