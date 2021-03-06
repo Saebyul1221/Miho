@@ -25,6 +25,7 @@
     "fs": "0.0.1-security",
     "knex": "^0.21.15",
     "mysql": "^2.18.1",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7",
     "request": "^2.88.2",
