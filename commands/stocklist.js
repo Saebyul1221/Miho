@@ -30,6 +30,10 @@ ${stocks}
   `
   )
 
+  embed.setDescription(
+    "주식 그래프는 [여기서](https://whitekj.xyz/stock) 확인하실 수 있어요!"
+  )
+
   message.channel.send(`${message.member}`, { embed: embed })
 }
 

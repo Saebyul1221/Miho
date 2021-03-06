@@ -62,6 +62,44 @@ window.location.href = "${data[0].url}"
   }
 })
 
+router.get("/stock", async (req, res) => {
+  let sasung = await knex("sasung")
+    .select("price")
+    .orderBy("count", "desc")
+    .limit(10)
+  let kokoa = await knex("kokoa")
+    .select("price")
+    .orderBy("count", "desc")
+    .limit(10)
+  let miho = await knex("miho")
+    .select("price")
+    .orderBy("count", "desc")
+    .limit(10)
+  let noname = await knex("noname")
+    .select("price")
+    .orderBy("count", "desc")
+    .limit(10)
+
+  let s = [],
+    k = [],
+    m = [],
+    n = []
+
+  for (let i = 0; i < 10; i++) {
+    s.push(sasung[i].price)
+    k.push(kokoa[i].price)
+    m.push(miho[i].price)
+    n.push(noname[i].price)
+  }
+
+  res.render("stock", {
+    _sasung: s.reverse(),
+    _kokoa: k.reverse(),
+    _miho: m.reverse(),
+    _noname: n.reverse(),
+  })
+})
+
 function invaild(res) {
   res.send("<p>존재하지 않는 링크입니다.</p>")
 }
