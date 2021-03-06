@@ -10,15 +10,18 @@ module.exports.run = async (client, message, args, knex, embed) => {
     commands.push(value.help.name)
   }
 
-  if (commands.includes(args[1]))
+  let regExp = /[\\{}\\[\]\\/?.,;:|\\)*~`!^\-_+<>@\\#$%&\\\\=\\(\\'\\"]/gi
+  let _arg = args[1].replace(regExp, "")
+
+  if (commands.includes(_arg))
     return message.channel.send(
       `${message.member} 봇 명령어와 겹치는 단어는 사용하실 수 없어요!`
     )
   let replyMsg = args
     .slice(2)
     .join(" ")
-    .replace("@everyone", "에브리원")
-    .replace("@here", "히얼")
+    .replaceAll("@everyone", "에브리원")
+    .replaceAll("@here", "히얼")
 
   let data = (
     await knex("custom").where({
