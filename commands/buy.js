@@ -1,3 +1,4 @@
+const { find } = require("../utils/functions")
 module.exports.run = async (_client, message, args, knex, embed) => {
   if (args.length < 3)
     return message.channel.send(
@@ -21,7 +22,9 @@ module.exports.run = async (_client, message, args, knex, embed) => {
   const user = (
     await knex("user").select("*").where({ id: message.author.id })
   )[0]
-  const stock = (await knex("stocks").select("*").where({ name: res[0].id }))[0]
+  const stock = (
+    await knex("stocks").select("*").where({ name: res[0].id })
+  )[0]
   var items = JSON.parse(user.items)
 
   var num = 0
@@ -100,14 +103,4 @@ module.exports.help = {
   name: "매수",
   description: "주식을 구매합니다.",
   use: "미호야 매수 [주식이름] [모두/반/갯수]",
-}
-
-function find(str) {
-  var s = [
-    { id: "sasung", name: "사성전자", alias: "사성" },
-    { id: "kokoa", name: "코코아", alias: "코코" },
-    { id: "miho", name: "미호전자", alias: "미호" },
-    { id: "noname", name: "무명증권", alias: "무명" },
-  ]
-  return s.filter((r) => r.id.includes(str) || r.name.includes(str))
 }

@@ -1,6 +1,13 @@
+const { comma, checkUser } = require("../utils/functions")
 module.exports.run = async (_client, message, _args, knex, embed) => {
   const stocks = await knex("stocks").select("*")
-  let user = (await knex("user").where({ id: message.author.id }))[0]
+  let member =
+    args[1] !== undefined
+      ? message.mentions.users.first()
+        ? message.mentions.users.first()
+        : checkUser(client, message, args[1])
+      : message.author
+  let user = (await knex("user").where({ id: member.id }))[0]
   let st = {
     sasung: "사성전자",
     kokoa: "코코아",
@@ -18,7 +25,7 @@ module.exports.run = async (_client, message, _args, knex, embed) => {
       items += "\n" + st[el] + ": `" + JSON.parse(user.items)[el] + "` 주"
   })
 
-  embed.setTitle(`${message.author.username}님의 지갑!\u200b`)
+  embed.setTitle(`${member.username}님의 지갑!\u200b`)
   embed.setDescription(
     `추정 자산: \`${comma(money + Number(user.money))}\`원\u200b`
   )
@@ -28,23 +35,6 @@ module.exports.run = async (_client, message, _args, knex, embed) => {
   )
 
   message.channel.send(`${message.member}`, { embed: embed })
-}
-
-function comma(num) {
-  let len, point, str
-
-  num = num + ""
-  point = num.length % 3
-  len = num.length
-
-  str = num.substring(0, point)
-  while (point < len) {
-    if (str != "") str += ","
-    str += num.substring(point, point + 3)
-    point += 3
-  }
-
-  return str
 }
 
 module.exports.help = {

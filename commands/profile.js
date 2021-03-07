@@ -1,3 +1,4 @@
+const { checkUser } = require("../utils/functions")
 module.exports.run = async (client, message, args, _knex, embed) => {
   let user =
     args[1] !== undefined
@@ -8,24 +9,6 @@ module.exports.run = async (client, message, args, _knex, embed) => {
   embed.setImage(user.displayAvatarURL({ size: 2048, dynamic: true }))
   embed.setFooter(user.username + "님의 프로필!")
   message.channel.send(`${message.member}`, { embed: embed })
-}
-
-function checkUser(client, message, user) {
-  let searchById = client.users.cache.get(user)
-  let searchByName = message.guild.members.cache.find(
-    (u) => u.displayName === user
-  )
-
-  if (
-    user === undefined ||
-    (searchById === undefined && searchByName === undefined)
-  )
-    throw new Error(
-      '유저 파라미터에 문제가 있습니다.\n존재하지 않는 유저일 수 있습니다.\n유저 검색은 "서버 내 이름"을 기준으로 합니다.'
-    )
-
-  if (searchById === undefined) return searchByName.user
-  else return searchById
 }
 
 module.exports.help = {
