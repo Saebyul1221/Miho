@@ -22,9 +22,7 @@ module.exports.run = async (_client, message, args, knex, embed) => {
   const user = (
     await knex("user").select("*").where({ id: message.author.id })
   )[0]
-  const stock = (
-    await knex("stocks").select("*").where({ name: res[0].id })
-  )[0]
+  const stock = (await knex("stocks").select("*").where({ name: res[0].id }))[0]
   let items = JSON.parse(user.items)
   let all = items[res[0].id] || 0
   let num = 0
