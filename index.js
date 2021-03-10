@@ -7,6 +7,7 @@ const knex = require("knex")(config.database)
 const Stocks = require("./utils/Stocks.js")
 const Stock = new Stocks(knex)
 const fs = require("fs")
+const checkGuild = "727347892960100363"
 const data = {
   register: [],
   cooldown: {},
@@ -37,6 +38,13 @@ client.on("ready", () => {
 
   cron.schedule("*/10 * * * *", async function () {
     await Stock.update()
+    let CheckOut = new (require("./utils/checkout"))(
+      client,
+      client.guilds.cache.get(checkGuild),
+      knex
+    )
+    await CheckOut.addRole()
+    await CheckOut.removeRole()
   })
 })
 
