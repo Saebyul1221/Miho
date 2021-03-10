@@ -162,7 +162,6 @@ client.on("guildMemberRemove", async (member) => {
     v.length === 1
   ) {
     await knex("statusMsg").where({ author: member.id }).del()
-    member.ban({ reason: "제한된 상태로 서버에서 나감" })
   }
 })
 
