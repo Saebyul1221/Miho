@@ -7,7 +7,6 @@ module.exports.run = async (client, message, args, knex, embed) => {
       `${message.member} \`${this.help.use}\`이 올바른 명령어에요!`
     )
   let betAmount = Number(args[1])
-  console.log(betAmount)
   let userMoney = (
     await knex("user").select("money").where({ id: message.author.id })
   )[0]
@@ -63,9 +62,6 @@ module.exports.run = async (client, message, args, knex, embed) => {
         let choose = userweapon[collected.array()[0].emoji.name]
         let result = getWinner(botweapon, choose)
         let resultEmbed = new MessageEmbed()
-        console.log("BOT: ", botweapon)
-        console.log("USER: ", choose)
-        console.log("RESULT:", result)
         let output = `
 베팅 금액: ${betAmount}
 미호를 상대로 **이길 시 3배!**
@@ -73,7 +69,6 @@ module.exports.run = async (client, message, args, knex, embed) => {
 `
         if (result === 0) {
           output += "얻은 금액: 0원 | 원금 회수"
-          console.log("DRAW")
           resultEmbed
             .setColor("GREEN")
             .setTitle("비겼습니다.")
@@ -121,12 +116,10 @@ module.exports.run = async (client, message, args, knex, embed) => {
 async function updateMoney(userid, userMoney, knex, bet, status) {
   if (status === "lose") {
     let lost = Number(userMoney) - Number(bet)
-    console.log("lose - function", lost)
     await knex("user").update({ money: lost }).where({ id: userid })
   }
   if (status === "win") {
     let get = Number(userMoney) + Number(bet) * 3
-    console.log("win - function", get)
     await knex("user").update({ money: get }).where({ id: userid })
   }
 }
