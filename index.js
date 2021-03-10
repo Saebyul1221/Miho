@@ -152,4 +152,18 @@ ${error}
     })
   }
 })
+
+client.on("guildMemberRemove", async (member) => {
+  let hasRole = member.roles.cache.get("819032348842393641")
+  let v = await knex("statusMsg").where({ author: member.id })
+  if (
+    member.guild.id === checkGuild &&
+    hasRole !== undefined &&
+    v.length === 1
+  ) {
+    await knex("statusMsg").where({ author: member.id }).del()
+    member.ban({ reason: "제한된 상태로 서버에서 나감" })
+  }
+})
+
 client.login(config.client.token)
