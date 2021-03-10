@@ -19,9 +19,9 @@ module.exports.run = async (_client, message, _args, knex, embed) => {
   })
 
   embed.setTitle(`${message.author.username}님의 지갑!\u200b`)
-  embed.setDescription(
-    `추정 자산: \`${comma(money + Number(user.money))}\`원\u200b`
-  )
+  embed.setDescription(`
+보유 자산: \`${comma(user.money)}\`원
+추정 자산: \`${comma(money + Number(user.money))}\`원\u200b`)
   embed.addField(
     "현재 주식 정보",
     items.length === 0 ? "보유한 주식이 없어요." : items.replace("\n", "")
