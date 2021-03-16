@@ -13,6 +13,7 @@ module.exports.run = async (client, message, args, knex) => {
       money +=
         stocks.find((i) => i.name === el).now * JSON.parse(user[i].items)[el]
     })
+    money += user[i].money
     users.push({ id: user[i].id, money: money })
   }
 
