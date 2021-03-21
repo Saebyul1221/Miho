@@ -39,6 +39,11 @@ module.exports = class Hosting {
     let fs = require("fs")
     let path = require("path")
     let imagePath = path.resolve(__dirname, `../web/images/${file.name}`)
+    let extension = file.name.split(".")
+    let ctx = extension.split(".")
+    let accepetExp = ["png", "jpeg", "jpg"]
+    if (!accepetExp.some((exp) => exp.includes(ctx[ctx.length])))
+      return this.exitst()
     request.get(file.url).pipe(fs.createWriteStream(imagePath))
   }
 
@@ -55,6 +60,13 @@ module.exports = class Hosting {
     this.message.channel.send(
       `${this.message.member} 성공적으로 ${_type}가 등록이 됬습니다!
       링크: ||https://whitekj.xyz/url?${type}=${url}||`
+    )
+  }
+
+  exitst() {
+    this.message.channel.send(
+      `${message.member} 등록이 가능한 확장자가 아닙니다!
+      지원하는 확장자: \₩[png, jpeg, jpg]\₩`
     )
   }
 }
