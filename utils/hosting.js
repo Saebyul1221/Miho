@@ -66,7 +66,7 @@ module.exports = class Hosting {
   exitst() {
     this.message.channel.send(
       `${message.member} 등록이 가능한 확장자가 아닙니다!
-      지원하는 확장자: \₩[png, jpeg, jpg]\₩`
+      지원하는 확장자: \`[png, jpeg, jpg]\``
     )
   }
 }
