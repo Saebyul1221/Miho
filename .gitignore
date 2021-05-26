@@ -1,4 +1,3 @@
-cogs/__pycache__
-lib/__pycache__
-lib/config.py
+__pycache__
+config.py
 start.bat
