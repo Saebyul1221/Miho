@@ -4,7 +4,7 @@ from discord.ext import commands
 import datetime
 
 
-class Typing():
+class Typing:
     def template_embed(self, ctx, title: str = "", description: str = ""):
         embed = discord.Embed(
             color=0xFFB0CF, timestamp=datetime.datetime.utcnow(), title=title, description=description)
