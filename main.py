@@ -13,6 +13,7 @@ def load_modules(bot):
     failed = []
     exts = [
         "cogs.general",
+        "cogs.events",
     ]
 
     for ext in exts:
