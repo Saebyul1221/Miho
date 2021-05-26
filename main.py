@@ -6,7 +6,8 @@ from lib import config
 bot = commands.Bot(
     command_prefix="미호야 ",
     help_command=None,
-    intents=discord.Intents.all()
+    intents=discord.Intents.all(),
+    chunk_guilds_at_startup=True,
 )
 
 def load_modules(bot):
