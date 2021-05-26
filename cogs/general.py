@@ -5,8 +5,8 @@ from lib.utils import Typing
 
 
 class General(commands.Cog, name="일반"):
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
         self.typing = Typing()
 
     @commands.command(name="핑", aliases=["레이턴시"])
@@ -17,5 +17,5 @@ class General(commands.Cog, name="일반"):
         await ctx.send(embed=embed)
 
 
-def setup(client):
-    client.add_cog(General(client))
+def setup(bot):
+    bot.add_cog(General(bot))
