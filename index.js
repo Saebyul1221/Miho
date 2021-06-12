@@ -165,7 +165,7 @@ client.on("message", async (message) => {
     "다시 한 번 물어봐.",
     "안 돼.",
   ]
-  let random = Math.floor(Math.random() * sora)
+  let random = Math.floor(Math.random() * sora.length)
   if (message.content.startsWith("미호님 ")) {
     ctx[1] !== undefined
       ? message.reply(sora[random])
