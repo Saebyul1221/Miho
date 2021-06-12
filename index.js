@@ -153,6 +153,26 @@ ${error}
   }
 })
 
+client.on("message", async (message) => {
+  if (message.author.bot) return
+
+  let ctx = message.content.split(" ")
+  let sora = [
+    "언젠가는.",
+    "가만히 있어.",
+    "그것도 안 돼.",
+    "그럼.",
+    "다시 한 번 물어봐.",
+    "안 돼.",
+  ]
+  let random = Math.floor(Math.random() * sora)
+  if (message.content.startsWith("미호님 ")) {
+    ctx[1] !== undefined
+      ? message.reply(sora[random])
+      : message.reply("뭘 묻고 싶은거지?")
+  }
+})
+
 client.on("guildMemberRemove", async (member) => {
   let hasRole = member.roles.cache.get("819032348842393641")
   let v = await knex("statusMsg").where({ author: member.id })
